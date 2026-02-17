@@ -1,0 +1,74 @@
+= GitHub action: Inform CloudBees Platform that an artifact was deployed
+
+Use this action to inform CloudBees Platform that an artifact was deployed to a target environment
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+| Input name
+| Data type
+| Required?
+| Description
+
+| `cloudbees-url`
+| String
+| No
+| The CloudBees platform URL. Default: `https://api.cloudbees.io`
+
+| `target-environment`
+| String
+| Yes
+| The target environment where the artifact was deployed (e.g., production, staging, dev).
+
+| `label`
+| String
+| No
+| The list of labels for the deployment.
+
+| `artifact-id`
+| String
+| Conditional^<<footnote,[1]>>^
+| The ID of the artifact being deployed. Required when `artifact-url` is not provided.
+
+| `artifact-url`
+| String
+| Conditional^<<footnote,[1]>>^
+| The URL of the artifact being deployed. Required when `artifact-id` is not provided.
+
+| `component-id`
+| String
+| No
+| The ID of the component associated with the deployment. If not provided, the default is the component ID where the GHA workflow is located.
+|===
+
+[#footnote]
+^[1]^ Either `artifact-id` or `artifact-url` must be provided. If you previously registered the artifact using the `register-build-artifact` action, use the `artifact-id`. Otherwise, provide the `artifact-url`.
+
+NOTE: This action uses GitHub OIDC authentication to securely communicate with the CloudBees Platform. Be sure to set `permissions: id-token: write` in your workflow.
+
+== Usage example
+
+To enable OIDC authentication with the CloudBees Platform, make sure to include the following permissions in your GitHub workflow.
+Then, in your YAML file, add:
+
+[source,yaml]
+----
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Register deployment
+        uses: cloudbees-gha-cbp/register-deployed-artifact@v1
+        with:
+          target-environment: "production"
+          artifact-id: ${{ steps.build.outputs.cbp_artifact_id }}
+          cloudbees-url: ${{ vars.CLOUDBEES_PLATFORM_URL }}
+          label: "release,v1.0.0"
+----
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].
