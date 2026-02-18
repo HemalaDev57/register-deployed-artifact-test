@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gha-register-deployed-artifact/cmd"
+	"register-deployed-artifact-test/cmd"
 	"log"
 )
 
