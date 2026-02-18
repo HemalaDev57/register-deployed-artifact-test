@@ -24,7 +24,7 @@ inputs:
   
 runs:
   using: "docker"
-  image: "docker://ghcr.io/hemaladev57/register-deployed-artifact-test/custom-action:latest"
+  image: "docker://ghcr.io/ghcr.io/hemaladev57/register-deployed-artifact-test/custom-action:latest"
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}    
     TARGET_ENVIRONMENT: ${{ inputs.target-environment }}
