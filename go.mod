@@ -1,4 +1,4 @@
-module gha-register-deployed-artifact
+module register-deployed-artifact-test
 
 go 1.25.7
 

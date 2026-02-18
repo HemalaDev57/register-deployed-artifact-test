@@ -3,16 +3,16 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"gha-register-deployed-artifact/internal/deployments"
 	"os"
 	"os/signal"
+	"register-deployed-artifact-test/internal/deployments"
 
 	"github.com/spf13/cobra"
 )
 
 var (
 	cmd = &cobra.Command{
-		Use:   "gha-register-deployed-action",
+		Use:   "register-deployed-test-action",
 		Short: "Publish the deployment metadata to CloudBees Platform",
 		Long:  "Publish the deployment metadata to CloudBees Platform",
 		RunE:  run,
@@ -25,7 +25,7 @@ func Execute() error {
 }
 
 func init() {
-	cmd.Flags().BoolVar(&cfg.DryRun, "dry-run", false, 
+	cmd.Flags().BoolVar(&cfg.DryRun, "dry-run", false,
 		"Dry run mode - validate configuration without sending events to CloudBees Platform")
 }
 
