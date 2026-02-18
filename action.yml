@@ -24,7 +24,7 @@ inputs:
   
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: ./
   env:
     CLOUDBEES_API_URL: ${{ inputs.cloudbees-url }}    
     TARGET_ENVIRONMENT: ${{ inputs.target-environment }}
