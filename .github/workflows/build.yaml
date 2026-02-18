@@ -31,7 +31,7 @@ jobs:
 
 
       - name: Log in to GHCR
-        run: echo "${{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Set Up Image Name and Tag
         id: vars
